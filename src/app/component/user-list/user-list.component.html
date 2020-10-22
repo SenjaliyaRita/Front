@@ -1,0 +1,12 @@
+<hr>
+
+<div *ngIf="userList.length === 0; else List" class="alert alert-info">No User Details to Display.</div>
+
+<ng-template #List>
+    <div class="card m-3">
+        <h5 class="card-header">User List</h5>
+    <div *ngFor="let user of userList" class="col col-md-4 mt-2">
+      <app-user-item [user]="user"></app-user-item>
+    </div>
+    </div>
+</ng-template>

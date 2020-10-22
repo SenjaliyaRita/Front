@@ -1,0 +1,27 @@
+
+<div class="card m-3 col-6">
+    <div class="card-body">
+        <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && OnSubmit()">
+                <div class="form-group col-12">
+                        <label>Username</label>
+                        <input type="text" class="form-control" [ngClass]="{'is-invalid': username.touched && username.invalid }"
+                        name="username" [(ngModel)]="model.username" id="username" required #username="ngModel"
+                        />
+                        <span class="invalid-feedback">Username can't be blank.</span>
+                </div>
+                <div class="form-group col-12">
+                        <label>Password</label>
+                        <input type="text" class="form-control" [ngClass]="{'is-invalid': username.touched && username.invalid }"
+                        name="password" [(ngModel)]="model.password" id="password" required #password="ngModel"
+                        />
+                        <span class="invalid-feedback">Password can't be blank.</span>
+                </div>
+            <div class="row">
+            <div class="text-center">
+                
+                <button class="btn btn-primary mr-1" type="submit" [disabled]="loginForm.invalid">Login</button>
+            </div>
+            </div>
+        </form>
+    </div>  
+</div>  
