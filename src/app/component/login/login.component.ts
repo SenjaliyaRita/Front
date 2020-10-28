@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { UserService } from '../../service/user.service'
 import { Router, ActivatedRoute } from '@angular/router'
-import { ToastrService } from 'ngx-toastr';    
+import { MessageService } from 'src/app/service/message.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     private userService:UserService,
     private router:Router,
     private route:ActivatedRoute,
-    private toastr:ToastrService
+    private messageSerivce:MessageService
     ) { }
 
   ngOnInit(): void {
@@ -29,16 +29,17 @@ export class LoginComponent implements OnInit {
   .subscribe((data: any) =>
      {console.log(data);
     if ("id" in data) {
-      this.toastr.success('Login successful');
+      localStorage.setItem('user',JSON.stringify(data));
+      this.messageSerivce.setMsg({msg:'Login successful',type:'success'});
       this.redirectToList();
     }
     else
-      this.toastr.error("Could not Register the user. Please try again later.");
+      this.messageSerivce.setMsg({msg:'Could not Register the user. Please try again later.',type:'success'});
   });
   }
 
   redirectToList(){
-    this.router.navigate(["/userList"]);
+    this.router.navigate(["/home"]);
   }
  
 }

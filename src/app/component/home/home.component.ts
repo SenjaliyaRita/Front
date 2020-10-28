@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/model/user.model';
+import { UserService } from 'src/app/service/user.service';
+
 
 @Component({
   selector: 'app-home',
@@ -9,11 +10,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  userdata;
-  constructor(private router: Router,public route: ActivatedRoute) { }
+  userdata=null;
+  constructor(private userService:UserService) { }
 
   ngOnInit(): void {
-    this.userdata = this.route.snapshot.paramMap.get('name');
+    this.userdata =JSON.parse(this.userService.checkUser());
+    console.log('home' + this.userdata.name);
    }
   }
 

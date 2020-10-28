@@ -3,19 +3,21 @@ import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';    
-import { ToastrModule } from 'ngx-toastr';  
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './component/registration/registration.component';
 import { HomeComponent } from './component/home/home.component';
-import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './component/login/login.component';
 import { UserListComponent } from './component/user-list/user-list.component';
 import { UserItemComponent } from './component/user-list/user-item/user-item.component';
+import { HeaderComponent } from './component/shared/header/header.component';
+import { FooterComponent } from './component/shared/footer/footer.component';
+import { GlobalAlertComponent } from './component/shared/global-alert/global-alert.component';
+import { NavbarComponent } from './component/shared/navbar/navbar.component';
+import { PageNotFoundComponent } from './component/shared/page-not-found/page-not-found.component';
 
-const routes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -24,26 +26,22 @@ const routes: Routes = [];
     HomeComponent,
     LoginComponent,
     UserListComponent,
-    UserItemComponent
-  
+    UserItemComponent,
+    HeaderComponent,
+    FooterComponent,
+    GlobalAlertComponent,
+    NavbarComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
-    BrowserAnimationsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: '', component: RegistrationComponent },
-      { path: 'home', component: HomeComponent },
-      { path: 'login',component: LoginComponent },
-      { path: 'userList',component: UserListComponent }
-    ])
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [RouterModule]
 })
 export class AppModule { }
 

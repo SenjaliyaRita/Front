@@ -1,9 +1,10 @@
 import { Component, OnInit  } from '@angular/core'
 import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
-import { ToastrService } from 'ngx-toastr';    
+  
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'src/app/service/message.service';
 
 @Component({
   selector: 'app-registration',
@@ -18,7 +19,7 @@ export class RegistrationComponent implements OnInit {
   
   constructor(
     private userService: UserService, 
-    private toastr: ToastrService,
+    private messageService: MessageService,
     private formBuilder: FormBuilder,
     private router: Router,
     public route: ActivatedRoute) { }
@@ -37,18 +38,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   get f() { return this.registrationForm.controls; }
- /* resetForm(form?: NgForm) {
-    if (form != null)
-    form.reset();
-     this.registrationForm = {
-      name: '',
-      mobileno: '',
-      emailid: '',
-      password: '',
-      address: '',
-      date:''
-    }
-  }*/
+ 
 
   OnSubmit() {
       this.submitted = true;
@@ -60,11 +50,12 @@ export class RegistrationComponent implements OnInit {
      this.userService.registerUser(this.registrationForm.value)
       .subscribe((data: any) => {console.log(data);
         if ("id" in data) {
-          this.toastr.success('User registration successful');
+          localStorage.setItem('user',data);
+          this.messageService.setMsg({msg:'User registration successful',type:'success'});
           this.redirectToHome(data);
         }
         else
-          this.toastr.error("Could not Register the user. Please try again later.");
+        this.messageService.setMsg({msg:'Could not Register the user. Please try again later.',type:'error'});
       });
   }
 

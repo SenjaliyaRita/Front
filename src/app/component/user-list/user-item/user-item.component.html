@@ -1,14 +1,21 @@
 
-<div class="card ">
-    <div class="card-body">
+<li class="list-group-item">
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 {{user.name}}
             </div>
-            <div class="col-8">
+            <div class="col-3">
                 {{user.emailid}}
+            </div>
+            <div class="col-3">
+                {{user.mobileno}}
+            </div>
+            <div class="col-2">
+                {{user.date | date:'dd MMM yyyy'}}
+            </div>
+            <div calss="col-1">
+                <button (click)="remove()" class="btn btn-link btn-sm">X</button>
             </div>
         </div>
        
-    </div>
-</div>  
+    </li>  

@@ -33,10 +33,21 @@ export class UserService {
 
   login({username:username,password:password}){
     const parameters={username:username,password:password}
-    return this.http.post('http://localhost:3001/user/login', parameters);
+    
+ return this.http.post('http://localhost:3001/user/login', parameters)
+    
+
   }
 
   getUserList(){
     return this.http.get('http://localhost:3001/user/list');
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+  }
+
+  checkUser() {
+    return localStorage.getItem('user');
   }
 }
