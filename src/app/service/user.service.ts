@@ -17,6 +17,7 @@ export class UserService {
 
   registerUser(user : User){
      const parameters: User = {
+      "id":0,
       "name": user.name,
       "mobileno": user.mobileno,
       "emailid":  user.emailid,
@@ -49,5 +50,10 @@ export class UserService {
 
   checkUser() {
     return localStorage.getItem('user');
+  }
+
+  removeUser(id:number){
+    const parameters={id:id}
+    return this.http.post('http://localhost:3001/user/deleteUser', parameters)
   }
 }

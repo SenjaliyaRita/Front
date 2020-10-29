@@ -17,6 +17,7 @@ import { FooterComponent } from './component/shared/footer/footer.component';
 import { GlobalAlertComponent } from './component/shared/global-alert/global-alert.component';
 import { NavbarComponent } from './component/shared/navbar/navbar.component';
 import { PageNotFoundComponent } from './component/shared/page-not-found/page-not-found.component';
+import { OnlyNumberDirective } from './directives/only-number.directive';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { PageNotFoundComponent } from './component/shared/page-not-found/page-no
     FooterComponent,
     GlobalAlertComponent,
     NavbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    OnlyNumberDirective
   ],
   imports: [
     BrowserModule,

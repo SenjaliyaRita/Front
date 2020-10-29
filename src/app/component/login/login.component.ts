@@ -30,11 +30,11 @@ export class LoginComponent implements OnInit {
      {console.log(data);
     if ("id" in data) {
       localStorage.setItem('user',JSON.stringify(data));
-      this.messageSerivce.setMsg({msg:'Login successful',type:'success'});
+      this.messageSerivce.setMsg({msg:'Login successful',type:'info'});
       this.redirectToList();
     }
     else
-      this.messageSerivce.setMsg({msg:'Could not Register the user. Please try again later.',type:'success'});
+      this.messageSerivce.setMsg({msg:'Could not Register the user. Please try again later.',type:'danger'});
   });
   }
 

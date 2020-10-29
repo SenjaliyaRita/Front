@@ -17,15 +17,20 @@ export class NavbarComponent implements OnInit {
   constructor(private userService:UserService,private messageService:MessageService,private router:Router) { }
 
   ngOnInit(): void {
-    this.user=JSON.parse(this.userService.checkUser());
-  // if(this.user!=null || this.user != undefined){
-  //   this.isLoggedIn$=
-  // }
+    this.checkUser()
+    this.messageService.getMsg()
+      .subscribe(() => {
+        this.checkUser()
+      })
+    
   }
 
+  checkUser(){
+    this.user=JSON.parse(this.userService.checkUser());
+  }
   logout(){
     this.userService.logout();
-    this.messageService.setMsg({msg:'Logout Successfull',type:'success'});
+    this.messageService.setMsg({msg:'Logout Successfull',type:'info'});
     this.router.navigate(['/'])
   }
 
