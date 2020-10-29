@@ -1,39 +1,38 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appOnlyNumber]'
+    selector: '[OnlyNumber]'
 })
 export class OnlyNumberDirective {
+    regexStr = new RegExp(/^[0-9]*$/g)
+    constructor(private el: ElementRef) { }
 
-  regexStr = '^[0-9]*$';
-  constructor(private el: ElementRef) { }
+    @Input() OnlyNumber: boolean;
 
-  @Input() OnlyNumber: boolean;
+    private specialKeys = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Delete'];
 
-  @HostListener('keydown', ['$event']) onKeyDown(event) {
-    let e = <KeyboardEvent> event;
-    if (this.OnlyNumber) {
-        if ([46, 8, 9, 27, 13, 110, 190].indexOf(e.keyCode) !== -1 ||
-        // Allow: Ctrl+A
-        (e.keyCode == 65 && e.ctrlKey === true) ||
-        // Allow: Ctrl+C
-        (e.keyCode == 67 && e.ctrlKey === true) ||
-        // Allow: Ctrl+V
-        (e.keyCode == 86 && e.ctrlKey === true) ||
-        // Allow: Ctrl+X
-        (e.keyCode == 88 && e.ctrlKey === true) ||
-        // Allow: home, end, left, right
-        (e.keyCode >= 35 && e.keyCode <= 39)) {
-          // let it happen, don't do anything
-          return;
+    @HostListener('keydown', ['$event'])
+    onKeyDown(event: KeyboardEvent) {
+
+        if (this.specialKeys.indexOf(event.key) !== -1 ||
+            // Allow: Ctrl+A
+            (event.keyCode == 65 && event.ctrlKey === true) ||
+            // Allow: Ctrl+C
+            // (event.keyCode == 67 && event.ctrlKey === true) ||
+            // // Allow: Ctrl+V
+            // // (event.keyCode == 86 && event.ctrlKey === true) ||
+            // // Allow: Ctrl+X
+            // (event.keyCode == 88 && event.ctrlKey === true) ||
+            // // Allow: home, end, left, right
+             (event.keyCode >= 35 && event.keyCode <= 39)) {
+            return;
         }
-      let ch = String.fromCharCode(e.keyCode);
-      let regEx =  new RegExp(this.regexStr);    
-      if(regEx.test(ch))
-        return;
-      else
-         e.preventDefault();
-      }
-  }
-
+        // Do not use event.keycode this is deprecated.
+        // See: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
+        let current: string = this.el.nativeElement.value;
+        let next: string = current.concat(event.key);
+        if (next && !String(next).match(this.regexStr)) {
+            event.preventDefault();
+        }
+    }
 }

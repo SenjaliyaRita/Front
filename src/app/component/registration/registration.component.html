@@ -52,7 +52,7 @@
                 <div class="form-group col">
                     <label>Mobile No.</label>
                     <input type="text" formControlName="mobileno" class="form-control" 
-                    [ngClass]="{ 'is-invalid': submitted && f.mobileno.errors }" />
+                    [ngClass]="{ 'is-invalid': submitted && f.mobileno.errors }" OnlyNumber="true" />
                     <div *ngIf="submitted && f.mobileno.errors" class="invalid-feedback">
                         <div *ngIf="f.mobileno.errors.required">Mobile No. is required</div>
                     </div>

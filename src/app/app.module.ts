@@ -17,7 +17,7 @@ import { FooterComponent } from './component/shared/footer/footer.component';
 import { GlobalAlertComponent } from './component/shared/global-alert/global-alert.component';
 import { NavbarComponent } from './component/shared/navbar/navbar.component';
 import { PageNotFoundComponent } from './component/shared/page-not-found/page-not-found.component';
-import { OnlyNumberDirective } from './directives/only-number.directive';
+import { SharedModule } from './directives/shared.module';
 
 
 @NgModule({
@@ -33,14 +33,14 @@ import { OnlyNumberDirective } from './directives/only-number.directive';
     GlobalAlertComponent,
     NavbarComponent,
     PageNotFoundComponent,
-    OnlyNumberDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],
